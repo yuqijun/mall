@@ -16,7 +16,9 @@ import co.yixiang.modules.security.config.SecurityProperties;
 import co.yixiang.modules.security.security.TokenProvider;
 import co.yixiang.modules.security.security.vo.AuthUser;
 import co.yixiang.modules.security.security.vo.JwtUser;
+//import co.yixiang.modules.security.service.OnlineUserService;
 import co.yixiang.modules.security.service.OnlineUserService;
+import co.yixiang.utils.RedisUtil;
 import co.yixiang.utils.RedisUtils;
 import co.yixiang.utils.SecurityUtils;
 import co.yixiang.utils.StringUtils;
@@ -44,40 +46,46 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-/**
- * @author hupeng
- * @date 2018-11-23
- * 授权、根据token获取用户详细信息
- */
-@Slf4j
-@RestController
+//
+///**
+// * @author hupeng
+// * @date 2018-11-23
+// * 授权、根据token获取用户详细信息
+// */
+//@Slf4j
+//@RestController
 @RequestMapping("/auth")
-@Api(tags = "系统：系统授权接口")
+//@Api(tags = "系统：系统授权接口")
 public class AuthController {
-
-    @Value("${loginCode.expiration}")
-    private Long expiration;
+//
+//    @Value("${loginCode.expiration}")
+//    private Long expiration;
     @Value("${rsa.private_key}")
     private String privateKey;
     @Value("${single.login}")
     private Boolean singleLogin;
     private final SecurityProperties properties;
     private final RedisUtils redisUtils;
-    private final UserDetailsService userDetailsService;
+//    private final UserDetailsService userDetailsService;
     private final OnlineUserService onlineUserService;
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-
-    public AuthController(SecurityProperties properties, RedisUtils redisUtils, UserDetailsService userDetailsService, OnlineUserService onlineUserService, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
-        this.properties = properties;
+//
+//    public AuthController(SecurityProperties properties, RedisUtils redisUtils, UserDetailsService userDetailsService, OnlineUserService onlineUserService, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+//        this.properties = properties;
+//        this.redisUtils = redisUtils;
+//        this.userDetailsService = userDetailsService;
+//        this.onlineUserService = onlineUserService;
+//        this.tokenProvider = tokenProvider;
+//        this.authenticationManagerBuilder = authenticationManagerBuilder;
+//    }
+    public AuthController(RedisUtils redisUtils,AuthenticationManagerBuilder authenticationManagerBuilder,TokenProvider tokenProvider,OnlineUserService onlineUserService,SecurityProperties properties){
         this.redisUtils = redisUtils;
-        this.userDetailsService = userDetailsService;
-        this.onlineUserService = onlineUserService;
-        this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.tokenProvider = tokenProvider;
+        this.onlineUserService = onlineUserService;
+        this.properties = properties;
     }
-
     @Log("用户登录")
     @ApiOperation("登录授权")
     @AnonymousAccess
@@ -98,7 +106,6 @@ public class AuthController {
         }
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(authUser.getUsername(), password);
-
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         // 生成令牌
@@ -117,45 +124,45 @@ public class AuthController {
         }
         return ResponseEntity.ok(authInfo);
     }
-
-    @ApiOperation("获取用户信息")
-    @GetMapping(value = "/info")
-    public ResponseEntity<Object> getUserInfo(){
-        JwtUser jwtUser = (JwtUser)userDetailsService.loadUserByUsername(SecurityUtils.getUsername());
-        return ResponseEntity.ok(jwtUser);
-    }
-
-    @AnonymousAccess
-    @ApiOperation("获取验证码")
-    @GetMapping(value = "/code")
-    public ResponseEntity<Object> getCode(){
-        // 算术类型 https://gitee.com/whvse/EasyCaptcha
-        ArithmeticCaptcha captcha = new ArithmeticCaptcha(111, 36);
-        // 几位数运算，默认是两位
-        captcha.setLen(2);
-        // 获取运算的结果
-        String result ="";
-        try {
-            result = new Double(Double.parseDouble(captcha.text())).intValue()+"";
-        }catch (Exception e){
-            result = captcha.text();
-        }
-        String uuid = properties.getCodeKey() + IdUtil.simpleUUID();
-        // 保存
-        redisUtils.set(uuid, result, expiration, TimeUnit.MINUTES);
-        // 验证码信息
-        Map<String,Object> imgResult = new HashMap<String,Object>(2){{
-            put("img", captcha.toBase64());
-            put("uuid", uuid);
-        }};
-        return ResponseEntity.ok(imgResult);
-    }
-
-    @ApiOperation("退出登录")
-    @AnonymousAccess
-    @DeleteMapping(value = "/logout")
-    public ResponseEntity<Object> logout(HttpServletRequest request){
-        onlineUserService.logout(tokenProvider.getToken(request));
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//
+//    @ApiOperation("获取用户信息")
+//    @GetMapping(value = "/info")
+//    public ResponseEntity<Object> getUserInfo(){
+//        JwtUser jwtUser = (JwtUser)userDetailsService.loadUserByUsername(SecurityUtils.getUsername());
+//        return ResponseEntity.ok(jwtUser);
+//    }
+//
+//    @AnonymousAccess
+//    @ApiOperation("获取验证码")
+//    @GetMapping(value = "/code")
+//    public ResponseEntity<Object> getCode(){
+//        // 算术类型 https://gitee.com/whvse/EasyCaptcha
+//        ArithmeticCaptcha captcha = new ArithmeticCaptcha(111, 36);
+//        // 几位数运算，默认是两位
+//        captcha.setLen(2);
+//        // 获取运算的结果
+//        String result ="";
+//        try {
+//            result = new Double(Double.parseDouble(captcha.text())).intValue()+"";
+//        }catch (Exception e){
+//            result = captcha.text();
+//        }
+//        String uuid = properties.getCodeKey() + IdUtil.simpleUUID();
+//        // 保存
+//        redisUtils.set(uuid, result, expiration, TimeUnit.MINUTES);
+//        // 验证码信息
+//        Map<String,Object> imgResult = new HashMap<String,Object>(2){{
+//            put("img", captcha.toBase64());
+//            put("uuid", uuid);
+//        }};
+//        return ResponseEntity.ok(imgResult);
+//    }
+//
+//    @ApiOperation("退出登录")
+//    @AnonymousAccess
+//    @DeleteMapping(value = "/logout")
+//    public ResponseEntity<Object> logout(HttpServletRequest request){
+//        onlineUserService.logout(tokenProvider.getToken(request));
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }

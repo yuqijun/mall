@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>serachVAL: {{serachVal}}</p>
+        添加产品<input v-model="itemname" type="text"   v-focuses />
+        </br>
+        搜索产品 <input type="text"  v-model="serachVal" />
+        <button v-on:click="axiosAdd()">添加产品</button>
+        <ul>
+            <li v-for="(v,i) in list">
+                {{v.name}}--{{v.data}}----{{v.id}}<a v-on:click="axiosDelet(v.id)" href="#" >删除</a>
+            </li>
+        </ul>
+    </div>
+</body>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                serachVal:'',
+                // list:[
+                //     // {name:"老王",data:new Date()},
+                //     // {name:"老李",data:new Date()},
+                //     // {name:"老谢",data:new Date()},
+                //     // {name:"老马",data:new Date()},
+                //     // {name:"xucheng",data:new Date()}
+                // ],
+
+                list:'',
+                itemname:''
+            },
+            watch : {
+                serachVal : function(newV,oldV){
+                    console.log("searchVal发生变化=="+newV)
+                    axios
+                        .get("http://localhost:3001/posts?name_like="+newV)
+                        .then((res)=>{
+                            console.log("搜索数据返回的name===="+res.data)
+                            this.list =  res.data
+                        })
+                }
+            },
+            computed:{
+                newList : function() {
+                    if(!this.serachVal){
+                        return this.list
+                    }else{
+                        return this.list.filter((item)=>{
+                            return item.name.startsWith(this.serachVal)
+                        })
+                    }
+                }
+            },
+            mounted(){
+                this.getAllPer()
+            },
+            methods:{
+                addItem : function(){
+                    this.list.unshift({
+                        name:this.itemname,
+                        data:new Date()
+                    })
+                },
+                deleteItem : function(index){
+                    this.list.splice(index,1);
+                },
+                getAllPer : function(){
+                    axios
+                        .get("http://localhost:3001/posts")
+                        .then((res)=>{
+                            const {status,data} = res
+                            console.log("status=="+status)
+                            if(status === 200){
+                                this.list = data
+                            }
+                        })
+                },
+                axiosDelet : function(id){
+                    axios
+                        .delete("http://localhost:3001/posts/"+id)
+                        .then((res=>{
+                            const {status} = res
+                            if(status === 200){
+                                alert("删除成功")
+                                this.getAllPer();
+                            }
+                        }))
+                },
+                axiosAdd : function(){
+                    axios
+                        .post("http://localhost:3001/posts",{
+                            name:this.itemname,
+                            title:"默认"
+                        })
+                        .then((res=>{
+                            const {status,data} = res
+                            console.log("add status=="+status)
+                            if(status === 200 || status ===201){
+                                alert("添加成功")
+                                this.getAllPer()
+                            }
+                        }))
+                },
+                axiosLike : function(value){
+                    axios
+                        .get("http://localhost:3001/posts?name_like"+this.serachVal)
+                        .then((res)=>{
+                            return res.data
+                        })
+                }
+            },
+            directives:{
+                focuses : {
+                    inserted(el){
+                        el.focus();
+                    }
+                }
+            }
+        });
+    </script>
+</html>

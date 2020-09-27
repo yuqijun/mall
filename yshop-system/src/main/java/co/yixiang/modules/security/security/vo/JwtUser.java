@@ -25,36 +25,68 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class JwtUser implements UserDetails {
 
-    private final Long id;
+//    private final Long id;
+//
+//    private final String username;
+//
+//    private final String nickName;
+//
+//    private final String sex;
+//
+//    @JsonIgnore
+//    private final String password;
+//
+//    private final String avatar;
+//
+//    private final String email;
+//
+//    private final String phone;
+//
+//    private final String dept;
+//
+//    private final String job;
+//
+//    @JsonIgnore
+//    private final Collection<GrantedAuthority> authorities;
+//
+//    private final boolean enabled;
+//
+//    private Timestamp createTime;
+//
+//    @JsonIgnore
+//    private final Date lastPasswordResetDate;
 
-    private final String username;
 
-    private final String nickName;
+    private  Long id;
 
-    private final String sex;
+    private  String username;
+
+    private  String nickName;
+
+    private  String sex;
 
     @JsonIgnore
-    private final String password;
+    private  String password;
 
-    private final String avatar;
+    private  String avatar;
 
-    private final String email;
+    private  String email;
 
-    private final String phone;
+    private  String phone;
 
-    private final String dept;
+    private  String dept;
 
-    private final String job;
+    private  String job;
 
     @JsonIgnore
-    private final Collection<GrantedAuthority> authorities;
+    private  Collection<GrantedAuthority> authorities;
 
-    private final boolean enabled;
+    private  boolean enabled;
 
     private Timestamp createTime;
 
     @JsonIgnore
-    private final Date lastPasswordResetDate;
+    private  Date lastPasswordResetDate;
 
     @JsonIgnore
     @Override
@@ -74,10 +106,32 @@ public class JwtUser implements UserDetails {
         return true;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     @JsonIgnore
     @Override
     public String getPassword() {
         return password;
+    }
+
+    public String getDept(){
+        return dept;
+    }
+
+    public String getJob(){
+        return job;
+    }
+
+    public String getNickName(){
+        return nickName;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
     }
 
     @Override
@@ -88,4 +142,6 @@ public class JwtUser implements UserDetails {
     public Collection getRoles() {
         return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
     }
+
+
 }

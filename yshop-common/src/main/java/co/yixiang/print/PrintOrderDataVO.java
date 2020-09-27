@@ -41,4 +41,33 @@ public class PrintOrderDataVO implements Serializable{
     private String mark;
     @ApiModelProperty(value = "门店名称")
     private String storeName;
+
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public BigDecimal getPayPrice() {
+        return payPrice;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
 }

@@ -15,7 +15,7 @@
         <module>yshop-system</module>
         <module>yshop-tools</module>
         <module>yshop-generator</module>
-        <module>yshop-api</module>
+<!--        <module>yshop-api</module>-->
         <module>yshop-mp</module>
         <module>yshop-shop</module>
         <module>yshop-mproot</module>
@@ -48,7 +48,22 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j</artifactId>
+            <version>1.3.8.RELEASE</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -207,6 +222,26 @@
             <groupId>eu.bitwalker</groupId>
             <artifactId>UserAgentUtils</artifactId>
             <version>1.20</version>
+        </dependency>
+
+<!--        七牛云-->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.14.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>happy-dns-java</artifactId>
+            <version>0.1.6</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

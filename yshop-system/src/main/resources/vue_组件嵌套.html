@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"  v-cloak>
+<!--    <child-b></child-b>-->
+    <child-a></child-a>
+</div>
+
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    Vue.component("child-b",{
+        template:"<div> 我是child-b组件</div>"
+    })
+    new Vue({
+        el:"#app",
+        data:{
+            msg:'abc'
+        },
+        components:{
+            'child-a':{template:"<div><child-b></child-b>我是child-a 组件</div>"}
+        }
+
+    })
+</script>
+</html>

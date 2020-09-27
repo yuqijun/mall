@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .acctive{
+        color:red;
+    }
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p :class="{acctive:isAcctive}">内容</p>
+    <button @click="isAcctive=!isAcctive">切换样式</button>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            isAcctive:true
+        },
+        methods:{
+
+        }
+    });
+</script>
+</html>

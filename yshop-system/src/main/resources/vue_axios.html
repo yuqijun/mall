@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+</head>
+<body>
+    <p>
+        axios
+    </p>
+</body>
+<script>
+    var timeer = new Date().getDate();
+    $(document).ready(function(){
+        alert("触发http请求")
+        axios
+            .get("http://localhost:3001/posts")
+            .then((res)=>{
+                for(var i in res.data){
+                    console.log("返回的数据=="+res.data[i].title)
+                }
+            })
+    })
+</script>
+</html>

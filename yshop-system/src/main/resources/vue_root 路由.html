@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+<!--    第一步  导入模块-->
+    <script src="https://cdn.staticfile.org/vue-router/2.7.0/vue-router.min.js"></script>
+</head>
+<body>
+<div id="app">
+<!--    第二步  使用标签-->
+    <p>
+    <router-link to="/aaa">aaa</router-link>
+    <router-link to="/bbb">bbb</router-link>
+    <router-link to="/ccc">ccc</router-link>
+    </p>
+    <router-view></router-view>
+</div>
+
+<script>
+
+    // 第三部步  创建组件
+    var comA = {
+        template:"<div>aaaaaa</div>"
+    };
+
+    var comB = {
+        template:"<div>bbbbbbbb</div>"
+    };
+
+    var comC = {
+        template:"<div>ccccccccccc</div>"
+    };
+
+    // 第四步  创建路由
+    var router = new VueRouter({
+        routes:[
+            {
+                path:'/aaa',
+                component: comA
+            }
+            , {
+                path:'/bbb',
+                component: comB
+            }
+            , {
+                path:'/ccc',
+                component: comC
+            }
+
+        ]
+    });
+
+    // 第五步 使用路由
+    new Vue({
+        el:"#app",
+        router:router
+    })
+
+
+</script>
+</body>
+</html>

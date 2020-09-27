@@ -22,4 +22,16 @@ public class OrderPrint {
 	private String title;
 	private String price;
 	private String num;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public String getNum() {
+		return num;
+	}
 }

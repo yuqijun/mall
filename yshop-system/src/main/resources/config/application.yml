@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8080
 
 spring:
   freemarker:
@@ -28,6 +28,8 @@ task:
 qiniu:
   # 文件大小 /M
   max-size: 15
+  accessKey: 55uigvQK31TmrFnr5nK59z1UuLe5xin2vzMZgYM_
+  sercetKey: rjad4bBrfLqrQDPP_DDBxXwMvfV8N8YTUZCCblO4
 
 #邮箱验证码有效时间/分钟
 code:
@@ -37,9 +39,27 @@ code:
 loginCode:
   expiration: 2
 
-#密码加密传输，前端公钥加密，后端私钥解密
+#密码加密传输，前端公钥加密，后端私钥解密     1024位的
 rsa:
-  private_key: MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEA0vfvyTdGJkdbHkB8mp0f3FE0GYP3AYPaJF7jUd1M0XxFSE2ceK3k2kw20YvQ09NJKk+OMjWQl9WitG9pB6tSCQIDAQABAkA2SimBrWC2/wvauBuYqjCFwLvYiRYqZKThUS3MZlebXJiLB+Ue/gUifAAKIg1avttUZsHBHrop4qfJCwAI0+YRAiEA+W3NK/RaXtnRqmoUUkb59zsZUBLpvZgQPfj1MhyHDz0CIQDYhsAhPJ3mgS64NbUZmGWuuNKp5coY2GIj/zYDMJp6vQIgUueLFXv/eZ1ekgz2Oi67MNCk5jeTF2BurZqNLR3MSmUCIFT3Q6uHMtsB9Eha4u7hS31tj1UWE+D+ADzp59MGnoftAiBeHT7gDMuqeJHPL4b+kC+gzV4FGTfhR9q3tTbklZkD2A==
+  private_key: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMtW601s3Wg71E96
+    4zVhnFhOXfSor1/6wTXyp6lVHcmqaBV3yPRYQlo/uicdpevVRvmJtmRtnm/il7Wl
+    JN8C2VzrsOQK3g4M9y6aN7U4CybzfXJOrtHmtWWzL9GVGws3k/CtkLEAhs8a7idT
+    HSS6xTRgEElaBBMkuof89KQWYXI1AgMBAAECgYAXdyliXvzSCY1/upO71k7flfOb
+    x1etwNdJLX6RuQPeAO9QAunK4OCPX6lQ2EgMhilRpMXKoyfUi5asXKl7nu2MafB3
+    /OMlM3ib9JNf0bVppOuJapCXcl6B2aMJDfSiLEcg4DqbLNtsZTzR54un1hzyxq2K
+    ugFsvlhJNGDOJUhNRQJBAOdn5SaLe5GIDSlaOGiMPaRHwGms+ICLh80rOhsmXCTG
+    lAoBNCEzPawyet+g5YjJA9UDHe4+eg9vtQjG0FVg8yMCQQDg82Td66sRzDwbjfZ+
+    sLmjhX/cv2/kn/4M2LvdR4IOqZQJof1QS0zmWSJnCzZNAP/7hVqN2knIYufq8BpK
+    0ebHAkA0xQODi7FNGapusK1GYhy4dshREOnGXotEZUQl5tSCampd8bJSk93Pg99z
+    WbyeOcDO9ZwAtWyeUooFC1l87tPjAkEAuVjyoEPhFW4RjKahFmwo2UpTOyDlYhxN
+    qGogCMg1qj0hg/pcDP+uYhHJXdwIJtSPFsAfB8h3iMutyY+CKmne2wJAB/cMlKEv
+    ocBFvvVS09zDCMl2Ckt2rmW3sKWDUK5FhuEbsJp/5NJlMw346B5XoasmM2fVU2RX
+    lZwn94UnvfHybw==
+  public_key: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDLVutNbN1oO9RPeuM1YZxYTl30
+    qK9f+sE18qepVR3JqmgVd8j0WEJaP7onHaXr1Ub5ibZkbZ5v4pe1pSTfAtlc67Dk
+    Ct4ODPcumje1OAsm831yTq7R5rVlsy/RlRsLN5PwrZCxAIbPGu4nUx0kusU0YBBJ
+    WgQTJLqH/PSkFmFyNQIDAQAB
+#  private_key: MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEA0vfvyTdGJkdbHkB8mp0f3FE0GYP3AYPaJF7jUd1M0XxFSE2ceK3k2kw20YvQ09NJKk+OMjWQl9WitG9pB6tSCQIDAQABAkA2SimBrWC2/wvauBuYqjCFwLvYiRYqZKThUS3MZlebXJiLB+Ue/gUifAAKIg1avttUZsHBHrop4qfJCwAI0+YRAiEA+W3NK/RaXtnRqmoUUkb59zsZUBLpvZgQPfj1MhyHDz0CIQDYhsAhPJ3mgS64NbUZmGWuuNKp5coY2GIj/zYDMJp6vQIgUueLFXv/eZ1ekgz2Oi67MNCk5jeTF2BurZqNLR3MSmUCIFT3Q6uHMtsB9Eha4u7hS31tj1UWE+D+ADzp59MGnoftAiBeHT7gDMuqeJHPL4b+kC+gzV4FGTfhR9q3tTbklZkD2A==
 
 # sm.ms 图床的 token
 smms:
@@ -53,19 +73,28 @@ yshop:
     appKey: 81f43a2e-f504-45c4-9b54-2637d59f8190
   apiUrl: http://127.0.0.1:8009/api
 
-mybatis-plus:
-  check-config-location: true
-  configuration:
-    map-underscore-to-camel-case: true
-  global-config:
-    db-config:
-      id-type: auto
-      logic-delete-value: 1
-      logic-not-delete-value: 0
-      mapper-locations: classpath*:mapper/**/*Mapper.xml
+#mybatis-plus:
+#  check-config-location: true
+#  configuration:
+#    map-underscore-to-camel-case: true
+#  global-config:
+#    db-config:
+#      id-type: auto
+#      logic-delete-value: 1
+#      logic-not-delete-value: 0
+#      mapper-locations: classpath*:mapper/**/*Mapper.xml
+
+
 # PageHelper分页插件
 pagehelper:
   helperDialect: mysql
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+
+logging:
+  level:
+    co.yixiang.modules.system.service.mapper: debug
+
+

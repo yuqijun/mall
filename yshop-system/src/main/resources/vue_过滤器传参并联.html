@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p >金额: {{money | A('$') | B('元')}}</p>
+</div>
+</body>
+<script>
+    Vue.filter('A', function (value,y) {
+        return y+value;
+    });
+
+    Vue.filter('B', function (value,y) {
+        return value+y;
+    });
+
+
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            money:"110"
+        }
+    });
+
+
+</script>
+</html>

@@ -3110,9 +3110,113 @@ CREATE TABLE `yx_wechat_user`  (
   INDEX `unionid`(`unionid`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '微信用户表' ROW_FORMAT = Dynamic;
 
+
+
+
+-- ----------------------------
+-- Table structure for yx_wechat_user
+-- ----------------------------
+DROP TABLE IF EXISTS `yx_product`;
+CREATE TABLE `yx_product`(
+`id` varchar(32) NOT NULL COMMENT '产品id',
+`p_id` int(12) PRIMARY KEY  NOT NULL AUTO_INCREMENT   COMMENT '主键',
+`shop_id` int(10) NOT NULL COMMENT '店铺id',
+`class_id` int(3) NOT NULL COMMENT '产品类别id',
+`url` varchar(255) NOT NULL COMMENT '产品图片url',
+`name` varchar(32) NOT NULL COMMENT '产品名称',
+`price` decimal(15,2) NOT NULL COMMENT '产品价格',
+`crt_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+`upd_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间'
+)ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '产品表' ROW_FORMAT = Dynamic;
+
+
+
+-- ----------------------------
+-- Table structure for yx_wechat_user
+-- ----------------------------
+DROP TABLE IF EXISTS `yx_shop`;
+CREATE TABLE IF NOT EXISTS `yx_shop`  (
+`id` INT(12) UNSIGNED ZEROFILL NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '主键',
+`user_id` INT(14) NOT NULL COMMENT '法人id',
+`class_id`  INT(3) NOT NULL COMMENT  '店铺类型id',
+`address` varchar(255) NOT NULL COMMENT '店铺地址',
+`tel` varchar(20) NOT NULL COMMENT '店铺联系电话',
+`license` varchar(255) NOT NULL COMMENT '营业许可证',
+`card_positive` varchar(255) NOT NULL COMMENT '法人身份证正面',
+`card_back` varchar(255) NOT NULL COMMENT '法人身份证反面',
+`crt_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+`upd_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间'
+)ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for yx_wechat_user
+-- ----------------------------
+DROP TABLE IF EXISTS `yx_order`;
+CREATE TABLE IF NOT EXISTS `yx_order`(
+`id` INT(12) UNSIGNED ZEROFILL NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '表主键',
+`no` varchar(32) NOT NULL COMMENT '订单号',
+`product_id` varchar(32) NOT NULL COMMENT '产品id',
+`shop_id`  INT(12)  NOT NULL COMMENT '店铺id',
+`product_class_id` INT(3) NOT NULL COMMENT '产品类id',
+`consumer_id` INT(14) NOT NULL COMMENT '买家id',
+`number` INT(14) NOT NULL COMMENT '购买的产品数量'
+)ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for yx_coupon_temp
+-- ----------------------------
+
+DROP TABLE IF EXISTS `yx_coupon_temp`;
+CREATE TABLE IF NOT EXISTS `yx_coupon_temp`(
+`coupon_temp_id` INT(15) UNSIGNED ZEROFILL NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '表主键',
+`coupon_price` Decimal(10,3) NOT NULL COMMENT '优惠券模板id',
+`coupon_option_id` INT(15) NOT NULL COMMENT '优惠券使用条件id',
+`coupon_start_time` TIMESTAMP NOT NULL COMMENT '优惠券可使用开始时间',
+`coupon_time_out` TIMESTAMP NOT NULL COMMENT '优惠券使用截止时间',
+`coupon_img`  varchar(255) NOT NULL COMMENT '优惠券图片url',
+`coupon_name` varchar(50)  NOT NULL COMMENT '优惠券名称' ,
+`coupon_type`  INT(3) NOT NULL COMMENT '优惠券类型',
+`shop_id` INT(12)  COMMENT '优惠券店铺所属id',
+`class_type` INT(3) COMMENT '优惠券所属产品 id',
+`crt_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+`upd_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+)ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券模板表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for yx_coupon
+-- ----------------------------
+
+DROP TABLE IF EXISTS `yx_coupon`;
+CREATE TABLE IF NOT EXISTS `yx_coupon`(
+`coupon_id` INT(15) UNSIGNED ZEROFILL NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '表主键  优惠券id',
+`coupon_temp_id` INT(15)  NOT NULL COMMENT '优惠券模板id   关联外键',
+`user_id`  INT(14) NOT NULL COMMENT '优惠券持有人id',
+`coupon_status` INT(2) NOT NULL COMMENT '0: 未使用，1: 已使用',
+`crt_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+`upd_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+)ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for yx_coupon_option
+-- ----------------------------
+
+DROP TABLE IF EXISTS `yx_coupon_option`;
+CREATE TABLE IF NOT EXISTS `yx_coupon_option`(
+`coupon_option_id` INT(15)  UNSIGNED ZEROFILL NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '表主键  优惠券使用条件id',
+`coupon_option_sql`  varchar(255) NOT NULL COMMENT '优惠券使用条件',
+`crt_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+`upd_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+)ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券使用条件表' ROW_FORMAT = Dynamic;
+
+
+
 -- ----------------------------
 -- Records of yx_wechat_user
 -- ----------------------------
+
+
+
 INSERT INTO `yx_wechat_user` VALUES (1, NULL, NULL, NULL, 'hupeng', '', 0, '', '', '', '', NULL, 0, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'wechat');
 
 SET FOREIGN_KEY_CHECKS = 1;

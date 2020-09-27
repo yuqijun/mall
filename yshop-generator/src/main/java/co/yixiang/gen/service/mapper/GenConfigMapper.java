@@ -4,14 +4,14 @@
 * 注意：
 * 本软件为www.yixiang.co开发研制
 */
-package co.yixiang.gen.service.mapper;
-
-import co.yixiang.common.mapper.CoreMapper;
-import co.yixiang.gen.domain.GenConfig;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
-
-@Repository
-@Mapper
-public interface GenConfigMapper extends CoreMapper<GenConfig> {
-}
+//package co.yixiang.gen.service.mapper;
+//
+//import co.yixiang.common.mapper.CoreMapper;
+//import co.yixiang.gen.domain.GenConfig;
+//import org.apache.ibatis.annotations.Mapper;
+//import org.springframework.stereotype.Repository;
+//
+//@Repository
+//@Mapper
+//public interface GenConfigMapper extends CoreMapper<GenConfig> {
+//}

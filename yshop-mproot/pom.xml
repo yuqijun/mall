@@ -16,11 +16,11 @@
         <mybatis-plus-boot-starter.version>3.2.0</mybatis-plus-boot-starter.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis-plus-boot-starter.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
+<!--            <version>${mybatis-plus-boot-starter.version}</version>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter -->
         <dependency>

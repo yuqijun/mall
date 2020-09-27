@@ -29,6 +29,22 @@ public class AuthUser {
 
     private String uuid = "";
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     @Override
     public String toString() {
         return "{username=" + username  + ", password= ******}";

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p >msg: {{msg| toUpcase}}</p>
+</div>
+</body>
+<script>
+    Vue.filter('toUpcase', function (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+    })
+
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            msg:"abc"
+        }
+    });
+
+
+</script>
+</html>

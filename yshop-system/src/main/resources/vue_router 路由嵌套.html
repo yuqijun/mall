@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue-router/2.7.0/vue-router.min.js"></script>
+</head>
+<body>
+<div id="app">
+<!--    首页-->
+<!--    热点-->
+<!--    音乐-->
+    <p>
+        <router-link to="/aaa">首页</router-link>
+        <router-link to="/bbb">热点</router-link>
+        <router-link to="/ccc">音乐</router-link>
+    </p>
+    <router-view style="border: 2px solid red"></router-view>
+</div>
+
+<script>
+
+
+    var comA = {
+        template:"<div>首页</div>"
+    };
+
+    var comB = {
+        template:"<div>热点</div>"
+    };
+
+    var comC = {
+        template:"<div>" +
+            "<router-link to='ccc/liuxing' tag='li'>流行音乐</router-link>" +
+            "<router-link to='ccc/gudian' tag='li'>古典音乐</router-link>" +
+             "<router-link to='ccc/yaogun' tag='li'>摇滚音乐</router-link>" +
+             "<router-view></router-view>" +
+            "</div>"
+    };
+
+    var musicSub = {
+        template:"<div>我是musicSub组件</div>"
+    };
+
+
+    var router = new VueRouter({
+        routes:[
+            {
+                path:'/aaa',
+                component: comA
+            }
+            , {
+                path:'/bbb',
+                component: comB
+            }
+            , {
+                path:'/ccc',
+                component: comC,
+                children:[
+                    {
+                        path:"*",
+                        component:musicSub
+                    }
+                ]
+            }
+
+        ]
+    });
+
+
+    new Vue({
+        el:"#app",
+        router:router
+    })
+
+
+</script>
+</body>
+</html>

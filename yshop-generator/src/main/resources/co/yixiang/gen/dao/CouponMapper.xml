@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.yixiang.gen.dao.CouponMapper">
+  <resultMap id="BaseResultMap" type="co.yixiang.gen.domain.increase.Coupon">
+    <result column="couponName"  property="couponName" />
+    <result column="couponPrice" property="couponPrice" />
+    <result column="couponStatus"  property="couponStatus" />
+    <result column="couponTimeOut"  property="couponTimeOut" />
+    <result column="shopId"  property="shopId" />
+    <result column="classType"  property="classType" />
+    <result column="couponImg"  property="couponImg" />
+  </resultMap>
+
+  <select id="getUserCoupon" resultMap="BaseResultMap" >
+    SELECT  temp.coupon_name,temp.coupon_price , coupon.coupon_status , temp.coupon_time_out,temp.shop_id,temp.class_type,
+    opt.coupon_option_sql,temp.coupon_img
+    from  yx_coupon  coupon  LEFT JOIN  yx_coupon_temp  temp
+    on coupon.coupon_temp_id = temp.coupon_temp_id
+    LEFT JOIN yx_coupon_option opt
+    on temp.coupon_option_id = opt.coupon_option_id
+    where (temp.shop_id=#{shopId}  or temp.coupon_type ="0" or temp.class_type=#{classType})
+    AND  temp.coupon_time_out >  NOW() AND coupon.user_id=#{userId}
+
+  </select>
+
+
+
+</mapper>

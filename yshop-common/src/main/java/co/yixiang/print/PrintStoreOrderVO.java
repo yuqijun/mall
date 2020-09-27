@@ -38,4 +38,28 @@ public class PrintStoreOrderVO implements Serializable {
     long startSecond;
     @ApiModelProperty(hidden = true)
     long endSecond;
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public String getDriverNo() {
+        return driverNo;
+    }
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public long getStartSecond() {
+        return startSecond;
+    }
+
+    public long getEndSecond() {
+        return endSecond;
+    }
 }

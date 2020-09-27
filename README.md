@@ -113,3 +113,8 @@ yshop基于当前流行技术组合的前后端分离商城系统： SpringBoot2
 - wxjava:https://github.com/Wechat-Group/WxJava
 - vue:https://github.com/vuejs/vue
 - element:https://github.com/ElemeFE/element
+
+
+
+json-server 启动方法
+json-server --watch --port 3001 db.json

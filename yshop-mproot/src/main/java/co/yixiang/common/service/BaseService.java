@@ -4,11 +4,11 @@
 * 注意：
 * 本软件为www.yixiang.co开发研制
 */
-package co.yixiang.common.service;
-
-import com.baomidou.mybatisplus.extension.service.IService;
-
-
-public interface BaseService<T> extends IService<T> {
-
-}
+//package co.yixiang.common.service;
+//
+//import com.baomidou.mybatisplus.extension.service.IService;
+//
+//
+//public interface BaseService<T> extends IService<T> {
+//
+//}

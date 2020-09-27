@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.yixiang.gen.dao.YxProductManulMapper">
+
+  <sql id="currency">
+    product.id AS id , product.name AS `name` ,
+    product.price AS price , product.url AS url ,
+    shop.shop_name AS shopName, shop.id as shopId
+    from yx_product product LEFT JOIN yx_shop shop
+    on product.shop_id = shop.id
+  </sql>
+
+
+  <resultMap id="BaseResultMap" type="co.yixiang.gen.domain.increase.ProductManul">
+    <result column="id"  property="id" />
+    <result column="name" property="name" />
+    <result column="price"  property="price" />
+    <result column="url"  property="url" />
+    <result column="shop_name"  property="shopName" />
+  </resultMap>
+
+  <select id="getByClassId" resultMap="BaseResultMap" >
+    select product.id AS id , product.name AS `name` ,
+    product.price AS price , product.url AS url ,
+    shop.shop_name AS shopName, shop.id as shopId
+    from yx_product product LEFT JOIN yx_shop shop
+    on product.shop_id = shop.id
+    where product.class_id = #{classId}
+  </select>
+
+  <select id="searchByProductName"  resultMap="BaseResultMap">
+    select
+    product.id AS id , product.name AS `name` ,
+    product.price AS price , product.url AS url ,
+    shop.shop_name AS shopName, shop.id as shopId
+    from yx_product product LEFT JOIN yx_shop shop
+    on product.shop_id = shop.id
+    where product.name like  concat('%',#{productName},'%')
+  </select>
+
+
+</mapper>

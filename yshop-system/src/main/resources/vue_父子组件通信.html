@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"  v-cloak>
+    <child-a></child-a>
+    </br>
+<!--    ③  引用数据-->
+    <child-b :a="msg"></child-b>
+</div>
+
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    Vue.component("child-b",{
+        template:"<div> 我是child-b组件---{{a}}</div>"
+        // ①声明变量
+        ,props:['a']
+    })
+    new Vue({
+        el:"#app",
+        // ②给变量赋值
+        data:{
+            msg:'我是父组件的数据',
+            a:10086
+        },
+        components:{
+            'child-a':{template:"<div>我是child-a 组件<child-b a='10086'></child-b></div>"}
+        }
+
+    })
+</script>
+</html>

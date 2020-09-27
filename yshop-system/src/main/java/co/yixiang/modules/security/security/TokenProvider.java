@@ -90,16 +90,20 @@ public class TokenProvider implements InitializingBean {
          Jwts.parser().setSigningKey(key).parseClaimsJws(authToken);
          return true;
       } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-         log.info("Invalid JWT signature.");
+//         log.info("Invalid JWT signature.");
+         System.err.println("Invalid JWT signature.");
          e.printStackTrace();
       } catch (ExpiredJwtException e) {
-         log.info("Expired JWT token.");
+//         log.info("Expired JWT token.");
+         System.err.println("Expired JWT token.");
          e.printStackTrace();
       } catch (UnsupportedJwtException e) {
-         log.info("Unsupported JWT token.");
+//         log.info("Unsupported JWT token.");
+         System.err.println("Unsupported JWT token.");
          e.printStackTrace();
       } catch (IllegalArgumentException e) {
-         log.info("JWT token compact of handler are invalid.");
+//         log.info("JWT token compact of handler are invalid.");
+         System.err.println("JWT token compact of handler are invalid.");
          e.printStackTrace();
       }
       return false;

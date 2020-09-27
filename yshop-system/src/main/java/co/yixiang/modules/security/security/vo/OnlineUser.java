@@ -16,7 +16,6 @@ import java.util.Date;
  * @author hupeng
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class OnlineUser {
 
@@ -36,5 +35,46 @@ public class OnlineUser {
 
     private Date loginTime;
 
+    public OnlineUser(String userName, String nickName, String job, String browser, String ip, String address, String key, Date loginTime) {
+        this.userName = userName;
+        this.nickName = nickName;
+        this.job = job;
+        this.browser = browser;
+        this.ip = ip;
+        this.address = address;
+        this.key = key;
+        this.loginTime = loginTime;
+    }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public String getBrowser() {
+        return browser;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public Date getLoginTime() {
+        return loginTime;
+    }
 }

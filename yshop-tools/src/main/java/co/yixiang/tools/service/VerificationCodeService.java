@@ -6,7 +6,7 @@
 */
 package co.yixiang.tools.service;
 
-import co.yixiang.tools.domain.VerificationCode;
+//import co.yixiang.tools.domain.VerificationCode;
 import co.yixiang.tools.domain.vo.EmailVo;
 
 /**
@@ -20,11 +20,11 @@ public interface VerificationCodeService {
      * @param code 验证码
      * @return EmailVo
      */
-    EmailVo sendEmail(VerificationCode code);
-
-    /**
-     * 验证
-     * @param code 验证码
-     */
-    void validated(VerificationCode code);
+//    EmailVo sendEmail(VerificationCode code);
+//
+//    /**
+//     * 验证
+//     * @param code 验证码
+//     */
+//    void validated(VerificationCode code);
 }

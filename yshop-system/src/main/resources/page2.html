@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="container">
+        <div class="left">
+            <div class="top">
+                <input type="text" placeholder="Search" />
+                <a href="javascript:;" class="search"></a>
+            </div>
+            <ul class="people">
+                <li class="person" data-chat="person1">
+                    <img src="img/thomas.jpg" alt="" />
+                    <span class="name">Thomas Bangalter</span>
+                    <span class="time">2:09 PM</span>
+                    <span class="preview"></span>
+                </li>
+                <li class="person" data-chat="person2">
+                    <img src="img/dog.png" alt="" />
+                    <span class="name">Dog Woofson</span>
+                    <span class="time">1:44 PM</span>
+                    <span class="preview"></span>
+                </li>
+                <li class="person" data-chat="person3">
+                    <img src="img/louis-ck.jpeg" alt="" />
+                    <span class="name">Louis CK</span>
+                    <span class="time">2:09 PM</span>
+                    <span class="preview"></span>
+                </li>
+                <li class="person" data-chat="person4">
+                    <img src="img/bo-jackson.jpg" alt="" />
+                    <span class="name">Bo Jackson</span>
+                    <span class="time">2:09 PM</span>
+                    <span class="preview"></span>
+                </li>
+                <li class="person" data-chat="person5">
+                    <img src="img/michael-jordan.jpg" alt="" />
+                    <span class="name">Michael Jordan</span>
+                    <span class="time">2:09 PM</span>
+                    <span class="preview"></span>
+                </li>
+                <li class="person" data-chat="person6">
+                    <img src="img/drake.jpg" alt="" />
+                    <span class="name">Drake</span>
+                    <span class="time">2:09 PM</span>
+                    <span class="preview"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="top"><span>To: <span class="name">Dog Woofson</span></span></div>
+            <div class="chat" data-chat="person1">
+                <div class="conversation-start" >
+                    <span>Today, 6:48 AM</span>
+                </div>
+            </div>
+            <div class="chat" data-chat="person2">
+                <div class="conversation-start" style="margin-top: 30px">
+                    <span>Today, 5:38 PM</span>
+                </div>
+                <textarea class="conversation-start"  style="width: 430px; height: 390px;border:none;" id="responseText" >
+
+                </textarea>
+            </div>
+            <div class="chat" data-chat="person3">
+                <div class="conversation-start">
+                    <span>Today, 3:38 AM</span>
+                </div>
+            </div>
+            <div class="chat" data-chat="person4">
+                <div class="conversation-start">
+                    <span>Yesterday, 4:20 PM</span>
+                </div>
+            </div>
+            <div class="chat" data-chat="person5">
+                <div class="conversation-start">
+                    <span>Today, 6:28 AM</span>
+                </div>
+            </div>
+            <div class="chat" data-chat="person6">
+                <div class="conversation-start" >
+                    <span>Monday, 1:27 PM</span>
+                </div>
+            </div>
+            <div class="write">
+                <a href="javascript:;" class="write-link attach"></a>
+                <input type="text" id="inputss"  />
+                <a href="javascript:;" class="write-link smiley"></a>
+                <a href="javascript:;" class="write-link send"  onclick="send()" ></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script  src="js/index.js"></script>
+
+<div style="text-align:center;margin:1px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+</body>
+<script type="text/javascript">
+    var socket;
+    if (!window.WebSocket) {
+        window.WebSocket = window.MozWebSocket;
+    }
+    if (window.WebSocket) {
+        socket = new WebSocket('ws://localhost:9090/ws?userId=0002');
+        // socket = new WebSocket("ws://localhost:8080/ws");
+        socket.onmessage = function(event) {
+            var ta = document.getElementById('responseText');
+            ta.value = ta.value + '\n' + event.data
+        };
+        socket.onopen = function(event) {
+            var ta = document.getElementById('responseText');
+            ta.value = "连接开启!";
+        };
+        socket.onclose = function(event) {
+            var ta = document.getElementById('responseText');
+            ta.value = ta.value + "连接被关闭";
+        };
+    } else {
+        alert("你的浏览器不支持 WebSocket！");
+    }
+
+    function send() {
+        //清空输入框
+        // console.log('111111111',document.getElementById('inputss').value)
+        if (!window.WebSocket) {
+            return;
+        }
+        if (socket.readyState === WebSocket.OPEN) {
+            socket.send(document.getElementById('inputss').value);
+        } else {
+            alert("连接没有开启.");
+        }
+        document.getElementById("inputss").value="";
+    }
+</script>
+</html>
