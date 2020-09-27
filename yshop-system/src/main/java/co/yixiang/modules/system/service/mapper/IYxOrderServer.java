@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface IYxOrderServer {
     int add(List<YxOrder> orderList);
+    public int changeStatus(String orderNo,String status);
 }

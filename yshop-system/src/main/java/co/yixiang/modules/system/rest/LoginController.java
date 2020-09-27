@@ -71,6 +71,7 @@ public class LoginController {
             return co.yixiang.modules.system.util.ResponseUtil.loginSuccess(token,jwtUser,true,String.valueOf(shopId),jwtUser.getTypeId().toString());
         }
         //返回数据     用户类型标记   用户java对象   token
-        return ResponseUtil.login(0,token,jwtUser.getTypeId().toString(),jwtUser.getId(),"true");
+
+        return co.yixiang.modules.system.util.ResponseUtil.loginSuccess(token,jwtUser,true,"",jwtUser.getTypeId().toString());
     }
 }

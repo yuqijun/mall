@@ -4,23 +4,27 @@
 
 
   <!--  手写sql-->
-  <select id="getUserOrder" resultMap="orderListMap">
-  select
-  o.no AS orderNo,
-  o.id AS id ,
-  (product.price*o.number) as amountDue,
-  (product.price*o.number) as aPayment,
-  product.name AS `name`,product.url AS url , o.number AS `number`,product.price AS price ,
-  (product.price*o.number) AS totalPrice,coalesce(temp.coupon_price,0) as dPayment
-  from  yx_order o LEFT JOIN yx_product product
-  on o.product_id = product.id
-  LEFT JOIN yx_coupon cou
-  on o.coupon_id = cou.coupon_id
-  LEFT JOIN yx_coupon_temp temp
-  on cou.coupon_temp_id = temp.coupon_temp_id
-  where o.consumer_id = #{userId}
-  and not exists (select * from yx_order ord where `no`=o.`no` and o.id>id)
-  </select>
+<select id="getUserOrder" resultMap="orderListMap">
+select
+shop.shop_name AS shopName,
+shop.id AS shopId,
+o.no AS orderNo,
+o.id AS id ,
+(product.price*o.number) as amountDue,
+(product.price*o.number) as aPayment,
+product.name AS `name`,product.url AS url , o.number AS `number`,product.price AS price ,
+(product.price*o.number) AS totalPrice,coalesce(temp.coupon_price,0) as dPayment
+from  yx_order o LEFT JOIN yx_product product
+on o.product_id = product.id
+LEFT JOIN yx_coupon cou
+on o.coupon_id = cou.coupon_id
+LEFT JOIN yx_coupon_temp temp
+on cou.coupon_temp_id = temp.coupon_temp_id
+INNER JOIN yx_shop AS shop
+on o.shop_id = shop.id
+where o.consumer_id = #{userId}
+and not exists (select * from yx_order ord where `no`=o.`no` and o.id>id)
+</select>
 
   <resultMap type="co.yixiang.gen.domain.increase.ShopOrder" id="orderListMap">
     <result property="orderNo" column="orderNo"></result>

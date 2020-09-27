@@ -3,8 +3,12 @@ package co.yixiang.gen.dao;
 import co.yixiang.gen.domain.YxOrder;
 import co.yixiang.gen.domain.YxOrderExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository("orderMapper")
 public interface YxOrderMapper {
     long countByExample(YxOrderExample example);
 

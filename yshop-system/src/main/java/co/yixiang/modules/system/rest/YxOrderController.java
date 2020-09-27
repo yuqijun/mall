@@ -38,14 +38,17 @@ public class YxOrderController {
 
         List<YxOrder> orderList = new ArrayList<>();
 
+        String no = (UUID.randomUUID().toString().replaceAll("-",""));
+
         for(YxProduct product : productList){
             YxOrder o = new YxOrder();
-            o.setNo(UUID.randomUUID().toString().replaceAll("-",""));
-            o.setConsumerId(param.getUserId());
+            o.setNo(no);
+            System.err.println("  赋值 no："+no);
+            o.setConsumerId(Integer.parseInt(param.getUserId()));
             o.setNumber(product.getNumber());
             o.setProductClassId(product.getClassId());
             o.setProductId(product.getId());
-            o.setShopId(param.getShopId());
+            o.setShopId(Integer.parseInt(param.getShopId()));
             orderList.add(o);
         }
 
@@ -90,6 +93,8 @@ public class YxOrderController {
            orderList1.add(order);
         }
 
+        System.err.println("");
+
         return ResponseUtil.succ(orderList1);
     }
 
@@ -111,6 +116,21 @@ public class YxOrderController {
         System.err.println("getOrderByStatus  ::status"+status);
 
         return ResponseUtil.succ(orderManualService.getOrderByStatus(shopId,Integer.parseInt(status)));
+    }
+
+
+    @PostMapping("/changeStatus")
+    public Object changeStatus(@RequestBody String reqStr){
+        System.err.println("进入更新订单状态控制器----参数："+reqStr);
+        Map map = JsonUtil.toHashMap(reqStr);
+        String orderNo = map.get("orderNo").toString();
+        String status = map.get("status").toString();
+        int  row = orderService.changeStatus(orderNo,status);
+        if(row<=0){
+            return ResponseUtil.err();
+        }else{
+            return ResponseUtil.succ(row);
+        }
     }
 
 }

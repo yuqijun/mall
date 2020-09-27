@@ -5,17 +5,17 @@ import co.yixiang.gen.domain.YxProduct;
 import java.util.List;
 
 public class Submit {
-    private Integer shopId;
-    private Integer userId;
+    private String  shopId;
+    private String userId;
     private List<YxProduct> productList;
 
     public Submit(){}
 
-    public Integer getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
@@ -23,11 +23,11 @@ public class Submit {
         return productList;
     }
 
-    public void setShopId(Integer shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
