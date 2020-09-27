@@ -16,6 +16,7 @@ public class ShopOrder  implements java.io.Serializable {
     private BigDecimal dPayment;
     private String shopName;
     private String shopId;
+    private String orderStatus;
     private List<ShopProduct> productList;
 
     public ShopOrder(){
@@ -79,6 +80,14 @@ public class ShopOrder  implements java.io.Serializable {
         this.shopId = shopId;
     }
 
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     @Override
     public String toString() {
         return "ShopOrder{" +
@@ -88,6 +97,7 @@ public class ShopOrder  implements java.io.Serializable {
                 ", dPayment=" + dPayment +
                 ", shopName='" + shopName + '\'' +
                 ", shopId='" + shopId + '\'' +
+                ", orderStatus='" + orderStatus + '\'' +
                 ", productList=" + productList +
                 '}';
     }

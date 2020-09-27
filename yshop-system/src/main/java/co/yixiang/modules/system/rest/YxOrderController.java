@@ -112,10 +112,11 @@ public class YxOrderController {
         Map reqMap = JsonUtil.toHashMap(req);
         String shopId =(String) reqMap.get("shopId");
         String status =  reqMap.get("status").toString();
-        System.err.println("getOrderByStatus  ::shopId"+shopId);
-        System.err.println("getOrderByStatus  ::status"+status);
 
-        return ResponseUtil.succ(orderManualService.getOrderByStatus(shopId,Integer.parseInt(status)));
+        List<ShopOrder> shopOrderList=orderManualService.getOrderByStatus(shopId,Integer.parseInt(status));
+        System.err.println("/getOrderByStatus    控制器返回："+shopOrderList);
+
+        return ResponseUtil.succ(shopOrderList);
     }
 
 
