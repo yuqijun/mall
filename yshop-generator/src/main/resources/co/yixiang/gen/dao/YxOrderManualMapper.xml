@@ -122,4 +122,32 @@ and not exists (select * from yx_order ord where `no`=o.`no` and o.id>id)
     and not exists (select * from yx_order ord where `no`=o.`no` and o.id>id)
   </select>
 
+
+<!--   用户表  订单表  产品表   where status-->
+
+  <select id="getOrderIndexStatus" resultMap="orderListMap">
+
+    select
+    o.status AS orderStatus,
+    o.no AS orderNo,
+    o.id AS id ,
+    (product.price*o.number) as amountDue,
+    (product.price*o.number) as aPayment,
+    product.name AS `name`,product.url AS url , o.number AS `number`,product.price AS price ,
+    (product.price*o.number) AS totalPrice,coalesce(temp.coupon_price,0) as dPayment
+
+
+    from yx_product product LEFT JOIN yx_order o
+    ON product.shop_id = o.shop_id  AND product.p_id = o.product_id
+    LEFT JOIN yx_coupon coupon
+    on o.coupon_id = coupon.coupon_id
+    LEFT JOIN yx_coupon_temp temp
+    on coupon.coupon_temp_id = temp.coupon_temp_id
+
+
+    where o.consumer_id=#{userId} and o.`status` =#{status}
+
+
+  </select>
+
 </mapper>

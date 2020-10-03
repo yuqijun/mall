@@ -1,6 +1,7 @@
 package co.yixiang.modules.system.rest;
 
 
+import co.yixiang.annotion.ParamsNotNull;
 import co.yixiang.gen.domain.YxOrder;
 import co.yixiang.gen.domain.YxProduct;
 import co.yixiang.gen.domain.increase.LitellOrder;
@@ -95,7 +96,29 @@ public class YxOrderController {
 
         System.err.println("");
 
+
+
         return ResponseUtil.succ(orderList1);
+    }
+
+
+    @PostMapping("/getOrderIndexStatus")
+    //根据用户的编号 信息  和 订单状态码 返回 list
+    Object getOrderIndexStatus(@RequestBody String reqStr){
+        Map reqMap = JsonUtil.toHashMap(reqStr);
+
+        //校验参数是否为空
+        if(null==reqMap.get("userId")||null==reqMap.get("status")){
+            return ResponseUtil.err();
+        }
+        String userId = reqMap.get("userId").toString();
+        String status = reqMap.get("status").toString();
+
+        //根据用户账号 account 和 订单状态码 status  筛选出匹配的数据库记录
+        // 用户表  订单表  产品表   where status
+
+
+        return ResponseUtil.succ(orderManualService.getOrderIndexStatus(userId,status));
     }
 
 
@@ -106,6 +129,8 @@ public class YxOrderController {
         return ResponseUtil.succ(orderManualService.getShopOrderByShopId(shopId));
     }
 
+
+    //疑似废弃
     @PostMapping("/getOrderByStatus")
     public Object getOrderByStatus(@RequestBody String req){
         System.err.println("getOrderByStatus  :: req"+req.toString());
